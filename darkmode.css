@@ -1,0 +1,51 @@
+p, strong, li {
+    color: #EEEEEE !important;
+}
+
+.bg-gray-50 {
+    background-color: #222831 !important;
+}
+
+.bg-gray-200, .bg-gray-200\/50, .bg-gray-100, .hover\:bg-gray-200\/50:hover, .bg-white {
+    background-color: #393E46 !important;
+}
+
+.bg-gray-200 {
+    background-color: #5e6268 !important;
+}
+
+.border-gray-200, .border-gray-100 {
+    border-color: #393E46 !important;
+}
+
+.bg-cyan-500 {
+    background-color: #393E46 !important;
+}
+
+.text-gray-500, .text-gray-700, .text-gray-800, .text-gray-900 {
+    color: #EEEEEE !important;
+}
+
+.text-gray-400, .text-cyan-500 {
+    color: rgb(148 163 184) !important;
+}
+
+.via-gray-200 {
+    --tw-gradient-stops: var(--tw-gradient-from), #393E46, var(--tw-gradient-to) !important;
+}
+
+.focus\:ring-cyan-300:focus {
+    --tw-ring-color: rgb(34 40 49 / var(--tw-ring-opacity)) !important
+}
+
+.bg-amber-100, .bg-cyan-50 {
+    background-color: #5e6268 !important;
+}
+
+.border-cyan-200 {
+    border-color: rgb(148 163 184) !important;
+}
+
+button.hover\:bg-gray-200.transition-colors.p-0\.5.rounded {
+    background-color: #5e6268 !important;
+}
