@@ -1,0 +1,43 @@
+:root {
+    --l-red: #ffc9c9;
+    --l-orange: #ffcea0;
+    --l-yellow: #fff7ae;
+    --l-green: #aff1b2;
+    --l-light-blue: #b4fffa;
+    --l-blue: #b8d1ff;
+    --l-purple: #dcbaff;
+    --l-pink: #ffc6fe;
+    --d-red: #de350b;
+    --d-orange: #fb7d4b;
+    --d-yellow: #ffc400;
+    --d-green: #12921a;
+    --d-light-blue: #1bd4f0;
+    --d-blue: #006cbf;
+    --d-purple: #7c39c7;
+    --d-pink: #e33ee1;
+}
+
+.divider-color-selector {
+    width: 16px;
+    height: 16px;
+    border-radius: 16px;
+    background-color: #333;
+    border: 2px solid #eeeeee;
+}
+
+.divider-color-1 {background-color: var(--l-red)}
+.divider-color-2 {background-color: var(--l-orange)}
+.divider-color-3 {background-color: var(--l-yellow)}
+.divider-color-4 {background-color: var(--l-green)}
+.divider-color-5 {background-color: var(--l-light-blue)}
+.divider-color-6 {background-color: var(--l-blue)}
+.divider-color-7 {background-color: var(--l-purple)}
+.divider-color-8 {background-color: var(--l-pink)}
+.divider-color-1-dark {background-color: var(--d-red)}
+.divider-color-2-dark {background-color: var(--d-orange)}
+.divider-color-3-dark {background-color: var(--d-yellow)}
+.divider-color-4-dark {background-color: var(--d-green)}
+.divider-color-5-dark {background-color: var(--d-light-blue)}
+.divider-color-6-dark {background-color: var(--d-blue)}
+.divider-color-7-dark {background-color: var(--d-purple)}
+.divider-color-8-dark {background-color: var(--d-pink)}
