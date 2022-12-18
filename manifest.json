@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "War Room Plus",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Add dark mode, colorful dividers, and more to War Room!",
     "content_scripts": [
         {
@@ -10,7 +10,6 @@
                 "js/darkmode.js"
             ],
             "css": [
-                "css/general.css",
                 "css/dividercolors.css"
             ],
             "matches": [
