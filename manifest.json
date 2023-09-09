@@ -1,16 +1,15 @@
 {
     "manifest_version": 3,
     "name": "War Room Plus",
-    "version": "1.2.1",
-    "description": "Add dark mode, colorful dividers, and more to War Room!",
+    "version": "1.3.0",
+    "description": "Add bonus features to War Room!",
     "content_scripts": [
         {
             "js": [
-                "js/dividercolors.js",
                 "js/darkmode.js"
             ],
             "css": [
-                "css/dividercolors.css"
+                "css/darkmode.css"
             ],
             "matches": [
                 "https://war.elk.sh/*"

@@ -1,70 +1,71 @@
-const getCurrentStyle = () => window.localStorage.getItem("war-room-theme") || "light"
+const THEMES = {
+    LIGHT: 'light',
+    DARK: 'dark',
+};
 
-const updateStyles = style => {
-    updateDarkMode()
+const LOCAL_STORAGE_THEME_KEY = 'war-room-theme';
+const DARK_MODE_CSS_CLASS = 'dark-mode';
+const DARK_MODE_TOGGLE_ID = 'dark-mode-toggle';
 
-    if (style !== "dark") {
-        document.getElementById("darkmode_styles").innerHTML = ""
-        return
+/**
+ * @description Gets the current theme for War Room from local storage.
+ * @returns The theme, as an element of THEMES
+ */
+const getCurrentStyle = () => {
+    const localStorageTheme = window.localStorage.getItem(LOCAL_STORAGE_THEME_KEY);
+    
+    // Make sure the theme in local storage is supported
+    if (localStorageTheme === THEMES.LIGHT || localStorageTheme === THEMES.DARK) {
+        return localStorageTheme;
     }
-    document.getElementById("darkmode_styles").innerHTML = `
-        p { color: #EEEEEE !important; }
-        strong { color: #EEEEEE !important; }
-        li { color: #EEEEEE !important; }
-        .bg-gray-50 { background-color: #222831 !important; }
-        .bg-gray-100 { background-color: #393E46 !important; }
-        .bg-gray-200\/50 { background-color: #393E46 !important; }
-         er\:bg-gray-200\/50:hover { background-color: #393E46 !important; }
-        .bg-white { background-color: #393E46 !important; }
-        .bg-gray-800 { background-color: #393E46 !important; }
-        .bg-gray-200 { background-color: #5e6268 !important; }
-        .border-gray-200 { border-color: #393E46 !important; }
-        .border-gray-100 { border-color: #393E46 !important; }
-        .bg-cyan-500 { background-color: #393E46 !important; }
-        .text-gray-500 { color: #EEEEEE !important; }
-        .text-gray-700 { color: #EEEEEE !important; }
-        .text-gray-800 { color: #EEEEEE !important; }
-        .text-gray-900 { color: #EEEEEE !important; }
-        .text-gray-400 { color: rgb(148 163 184) !important; }
-        .text-cyan-500 { color: rgb(148 163 184) !important; }
-        .via-gray-200 { --tw-gradient-stops: var(--tw-gradient-from), #393E46, var(--tw-gradient-to) !important; }
-        .from-gray-200 { --tw-gradient-stops: #393E46, var(--tw-gradient-to) !important; }
-        .focus\:ring-cyan-300:focus { --tw-ring-color: rgb(34 40 49 / var(--tw-ring-opacity)) !important }
-        .bg-amber-100 { background-color: #5e6268 !important; }
-        .bg-cyan-50 { background-color: #5e6268 !important; }
-        .border-cyan-200 { border-color: rgb(148 163 184) !important; }
-        button.hover\:bg-gray-200.transition-colors.p-0\.5.rounded { background-color: #5e6268 !important; }
-        .h-3.w-3.rounded-full.transition.flex.items-center.bg-white.translate-x-4 { background-color: #5e6268 !important; }
-    `
+
+    // By default, return the light theme
+    return THEMES.LIGHT;
 }
 
-// add the dark mode style tag to the head of the page
-document.querySelector("head").innerHTML += `<style id="darkmode_styles"></style>`
-updateStyles(getCurrentStyle())
+/**
+ * @description Update the style of War Room with the provided style.
+ * @param {Theme} style The theme that should be applied.
+ */
+const updateStyles = (style) => {
+    if (style === THEMES.DARK) {
+        document.body.classList.add(DARK_MODE_CSS_CLASS);
+    } else {
+        document.body.classList.remove(DARK_MODE_CSS_CLASS);
+    }
+}
 
-// add button to enable/disable dark mode once the page loads
-const addInitialButton = setInterval(() => {
-    const buttonDiv = document.querySelectorAll(".sticky.top-0.p-4.bg-gray-50")
-    if (buttonDiv.length === 0) return
+/**
+ * @description Add the theme toggle button to the page once it loads.
+ */
+const addDarkModeToggle = setInterval(() => {
+    const recurringTasksButton = document.querySelector('[href="https://war.elk.sh/recurring"]');
+    if (!recurringTasksButton) {
+        return;
+    };
 
-    for (const div of buttonDiv) {
-        if (div.innerHTML.indexOf("Get the War Room app!") !== -1) {
-            const button = document.createElement("button")
-            button.classList = "block ml-auto font-sans text-sm text-gray-500 underline decoration-gray-400"
-            button.id = "style-change-button"
-            button.innerHTML = `${(getCurrentStyle() === "light") ? "Enable" : "Disable"} dark mode`
-            button.onclick = () => {
-                const button = document.querySelector("#style-change-button")
-                const style = getCurrentStyle()
+    const quickLinksContainer = recurringTasksButton.parentNode;
+    quickLinksContainer.classList.add('gap-y-1');
+    quickLinksContainer.classList.add('sm:gap-y-1.5');
 
-                button.innerHTML = `${(style === "light") ? "Disable" : "Enable"} dark mode`
-                window.localStorage.setItem("war-room-theme", (style === "light") ? "dark" : "light")
+    // Some elements take a little while to load in, so refresh the
+    // dark mode styles just in case stuff hasn't loaded yet
+    updateStyles(getCurrentStyle())
 
-                updateStyles((style === "light") ? "dark" : "light")
-            }
-            div.children[0].after(button)
-        }
+    const darkModeToggle = document.createElement('a');
+    darkModeToggle.classList = recurringTasksButton.classList;
+    darkModeToggle.id = DARK_MODE_TOGGLE_ID;
+    darkModeToggle.innerHTML = `${(getCurrentStyle() === THEMES.LIGHT) ? "Enable" : "Disable"} dark mode`
+    darkModeToggle.onclick = () => {
+        const style = getCurrentStyle();
+        darkModeToggle.innerHTML = `${(getCurrentStyle() === THEMES.LIGHT) ? "Diable" : "Enable"} dark mode`;
+        window.localStorage.setItem(LOCAL_STORAGE_THEME_KEY, (style === THEMES.LIGHT) ? THEMES.DARK : THEMES.LIGHT);
+        updateStyles((style === THEMES.LIGHT) ? THEMES.DARK : THEMES.LIGHT);
     }
 
-    clearInterval(addInitialButton)
-}, 1)
+    recurringTasksButton.after(darkModeToggle);
+
+    clearInterval(addDarkModeToggle);
+}, 1);
+
+updateStyles(getCurrentStyle());
